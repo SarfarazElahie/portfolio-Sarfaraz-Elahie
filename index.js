@@ -264,25 +264,42 @@ const createParticles = () => {
 const contactForm = document.querySelector('.contact-form');
 
 if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        // Form will be handled by Netlify
-        // Add custom validation or animations here if needed
-        
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault(); 
+
         const submitBtn = contactForm.querySelector('.btn-submit');
         const originalText = submitBtn.innerHTML;
         
         submitBtn.innerHTML = '<span>Sending...</span>';
         submitBtn.disabled = true;
-        
-        // Netlify will handle the actual submission
-        // This is just for visual feedback
-        setTimeout(() => {
+
+        const data = new FormData(contactForm);
+
+        fetch(contactForm.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+        }).then(response => {
+            if (response.ok) {
+                submitBtn.innerHTML = '<span>Message Sent!</span>';
+                submitBtn.style.background = '#22c55e'; // Success Green
+                contactForm.reset();
+                
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.style.background = ''; 
+                    submitBtn.disabled = false;
+                }, 3000);
+            } else {
+                throw new Error();
+            }
+        }).catch(() => {
+            alert("Oops! There was a problem sending your message.");
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
-        }, 2000);
+        });
     });
 }
-
 // ========================================
 // PROJECT CARD TILT EFFECT
 // ========================================
