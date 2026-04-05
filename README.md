@@ -6,7 +6,7 @@ A modern, responsive personal portfolio website built to showcase my skills, pro
 
 ## 🚀 Live Demo
 
-[View Portfolio]([https://share-frame-social-media-app-by-sarfarazelahie-fronte.vercel.app/](https://sarfaraz-elahie-portfolio-2026.netlify.app/))
+[View Portfolio] : https://sarfaraz-elahie-portfolio-2026.netlify.app/
 
 ---
 
